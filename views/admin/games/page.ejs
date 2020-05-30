@@ -1,0 +1,69 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <h2>Jogos</h2>
+            <a class="btn btn-success" href="/admin/games/new">Adicionar novos jogos</a>
+            <hr>
+            <form action="/game/search" method="post">
+                <label>Procure jogos por aqui: <input type="text" name="search" class="form-control"></label>
+            </form>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Título</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% result.games.rows.forEach(game => {  %>    
+                        <tr>
+                            <td><%= game.id %></td>
+                            <td><%= game.category.title %></td>
+                            <td><%= game.title %></td>
+                            <td>R$ &nbsp; <%= game.price%></td>
+                            <td>
+                                <a class="btn btn-warning" href="/admin/games/edit/<%= game.id %>" style="display: inline-block;">Editar</a>
+
+                                <form action="/game/delete" method="POST" id="form-admin" onsubmit="confirmDelete(event, this)" style="display: inline-block;">
+                                    <input type="hidden" name="id" value="<%= game.id %>">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <hr>
+            <div class="row">
+                <div class="col col-12">
+                    <% if(result.page > 2) { %>
+                        <a href="/articles/page/<%= result.page - 1 %>" style="float: left;"> <<< Prev </a>
+                    <% } else if(result.page == 2) { %>
+                        <a href="/admin/games" style="float: left;"> <<< Prev </a>
+                    <% } %>
+
+                    <% if(result.next) { %>
+                        <a href="/articles/page/<%= result.page + 1 %>" style="float: right;">Next >>></a>
+                    <% } %>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </body>
+<%- include('../../partials/footer.ejs') %>
+<script>
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este jogo?");
+
+        if (decision) {
+            form.submit();
+        }
+    }
+</script>

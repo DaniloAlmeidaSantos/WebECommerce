@@ -1,0 +1,52 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <h2>Jogos</h2>
+            <a class="btn btn-success" href="/admin/games/new">Adicionar novos jogos</a>
+            <hr>
+            <form action="/game/search" method="post">
+                <label>Procure jogos por aqui: <input type="text" name="search" class="form-control"></label>
+            </form>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% games.forEach(game => {  %>    
+                        <tr>
+                            <td><%= game.id %></td>
+                            <td><%= game.title %></td>
+                            <td>R$ &nbsp; <%= game.price%></td>
+                            <td>
+                                <a class="btn btn-warning" href="/admin/games/edit/<%= game.id %>" style="display: inline-block;">Editar</a>
+
+                                <form action="/game/delete" method="POST" id="form-admin" onsubmit="confirmDelete(event, this)" style="display: inline-block;">
+                                    <input type="hidden" name="id" value="<%= game.id %>">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </body>
+<%- include('../../partials/footer.ejs') %>
+<script>
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este jogo?");
+
+        if (decision) {
+            form.submit();
+        }
+    }
+</script>

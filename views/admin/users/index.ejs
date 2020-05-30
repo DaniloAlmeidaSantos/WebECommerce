@@ -1,0 +1,50 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <h2>Usuários</h2>
+            <a class="btn btn-success" href="/admin/users/create">Criar novo usuário</a>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Email</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(admin => { %>    
+                        <tr>
+                            <td><%= admin.id %></td>
+                            <td><%= admin.name %></td>
+                            <td><%= admin.lastName %></td>
+                            <td><%= admin.email %></td>
+                            <td>
+                                <a class="btn btn-warning" href="/admin/user/edit/<%= admin.id %>" style="display: inline-block;">Editar</a>
+
+                                <form action="/admin/delete" method="POST" id="form-admin" onsubmit="confirmDelete(event, this)" style="display: inline-block;">
+                                    <input type="hidden" name="id" value="<%= admin.id %>">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </body>
+<%- include('../../partials/footer.ejs') %>
+<script>
+    function confirmDelete(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este usuário?");
+
+        if (decision) {
+            form.submit();
+        }
+    }
+</script>

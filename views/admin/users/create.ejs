@@ -1,0 +1,20 @@
+<%- include('../../partials/header.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2>Criar novos administradores</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/admin/create" method="POST">
+                        <input type="text" name="name" class="form-control" placeholder="Nome"><br>
+                        <input type="text" name="lastName" class="form-control" placeholder="Sobrenome"><br>
+                        <input type="email" name="email" class="form-control" placeholder="email@example.com"><br>
+                        <input type="password" name="password" class="form-control" placeholder="******"><br>
+                        <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>    

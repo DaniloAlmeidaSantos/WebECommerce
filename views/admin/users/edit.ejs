@@ -1,0 +1,20 @@
+<%- include('../../partials/header.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2>Editar administradores</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/admin/update" method="POST">
+                        <input type="hidden" name="id" value="<%= admin.id %>">
+                        <input type="text" name="name" class="form-control" placeholder="Nome" value="<%= admin.name %>"><br>
+                        <input type="text" name="lastName" class="form-control" placeholder="Sobrenome" value="<%= admin.lastName %>"><br>
+                        <input type="email" name="email" class="form-control" placeholder="email@example.com" value="<%= admin.email %>"><br>
+                        <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>    
