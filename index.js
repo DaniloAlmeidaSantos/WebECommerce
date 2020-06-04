@@ -48,7 +48,30 @@ app.use("/", categoryController);
 app.use("/", gameController);
 
 app.get("/", (req, res) => {
-    res.render("index");
+    Game.findAll().then(games => {
+        if (req.session.user) {
+            res.render("index", {user: true, games: games});
+        } else {
+            res.render("index", {user: false, games: games});
+        }
+    })
+});
+
+app.get("/purchase/:id", (req, res) => {
+    var id = req.params.id;
+
+    Game.findOne(
+        {
+            include:  [{model: Category}],
+            where: {id: id}
+        }
+    ).then(game =>  {
+        if (req.session.user) {
+            res.render("purchase", {user: true, game: game});
+        } else {
+            res.render("purchase", {user: false, game: game});
+        }
+    })
 });
 
 app.listen(8080, () => {

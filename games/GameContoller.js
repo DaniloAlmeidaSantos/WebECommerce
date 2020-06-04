@@ -12,7 +12,7 @@ const multer        = require("../middlewares/multer");
 router.get("/admin/games", adminAuth,  (req, res) => {
     Game.findAll({
         include: [{model: Category}],
-        limit: 4
+        limit: 30
     }).then(games => {
         res.render("admin/games/index", {games: games});
     });
@@ -47,6 +47,8 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
         var url         = req.body.url;
         var desc        = req.body.desc;
         var category    = req.body.category;
+        var stock       = req.body.stock;
+        var indicated   = req.body.indicated;
         
         if (title != undefined && price != undefined) {
             Game.create({
@@ -56,7 +58,9 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
                 image: req.file.filename,
                 link: url,
                 description: desc,
-                categoryId: category
+                categoryId: category,
+                stock: stock,
+                indicated: indicated
             }).then(() => {
                 res.redirect("/admin/games");
             }).catch(err => {
@@ -72,11 +76,14 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
 
 router.post("/game/update", multer.single('image'), adminAuth, (req, res, next) => {
     if (req.file) {
-        var id      = req.body.id;
-        var title   = req.body.title;
-        var price   = req.body.price;
-        var url     = req.body.url;
-        var desc    = req.body.desc;
+        var id          = req.body.id;
+        var title       = req.body.title;
+        var price       = req.body.price;
+        var url         = req.body.url;
+        var desc        = req.body.desc;
+        var category    = req.body.category;
+        var stock       = req.body.stock;
+        var indicated   = req.body.indicated;
         
         if (title != undefined && price != undefined) {
             Games.update(
@@ -85,7 +92,10 @@ router.post("/game/update", multer.single('image'), adminAuth, (req, res, next) 
                     price: parseFloat(price),
                     slug: slugify(title),
                     link: url,
-                    description: desc
+                    description: desc,
+                    categoryId: category,
+                    stock: stock,
+                    indicated: indicated
                 },
                 {
                     where: {id: id}
@@ -144,19 +154,19 @@ router.get("/games/page/:num", adminAuth, (req, res) => {
     if (isNaN(page)) {
         offset = 0;
     } else {
-        offset = (parseInt(page) - 1) * 4;
+        offset = (parseInt(page) - 1) * 30;
     }
 
     Game.findAndCountAll(
         {
-	    include: [{model: Category}],
-            limit: 4,
+	        include: [{model: Category}],
+            limit: 30,
             offset: offset
         }
     ).then(games => {
         var next;
 
-        if (offset + 4 >= games.count) {
+        if (offset + 30 >= games.count) {
             next = false;
         } else {
             next = true;

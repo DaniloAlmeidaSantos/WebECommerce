@@ -21,6 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Others consults in database -->
                     <% result.games.rows.forEach(game => {  %>    
                         <tr>
                             <td><%= game.id %></td>
@@ -40,6 +41,8 @@
                 </tbody>
             </table>
             <hr>
+
+            <!-- decision structure to know if there will be a next page -->
             <div class="row">
                 <div class="col col-12">
                     <% if(result.page > 2) { %>

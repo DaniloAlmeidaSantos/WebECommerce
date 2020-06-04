@@ -4,7 +4,7 @@
         <div class="container">
             <hr>
             <h2>Jogos</h2>
-            <a class="btn btn-success" href="/admin/games/new">Adicionar novos jogos</a>
+            <a class="btn btn-success" href="/admin/category/new">Adicionar novos jogos</a>
             <hr>
             <table class="table table-bordered">
                 <thead>
@@ -15,15 +15,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Show all items in database in the catgories table -->
                     <% categories.forEach(category => { %>    
                         <tr>
                             <td><%= category.id %></td>
                             <td><%= category.title %></td>
                             <td>
-                                <a class="btn btn-warning" href="/admin/category/edit/<%= game.id %>" style="display: inline-block;">Editar</a>
+                                <a class="btn btn-warning" href="/admin/category/edit/<%= category.id %>" style="display: inline-block;">Editar</a>
 
                                 <form action="/category/delete" method="POST" id="form-admin" onsubmit="confirmDelete(event, this)" style="display: inline-block;">
-                                    <input type="hidden" name="id" value="<%= game.id %>">
+                                    <input type="hidden" name="id" value="<%= category.id %>">
                                     <button class="btn btn-danger">Excluir</button>
                                 </form>
                             </td>
@@ -34,6 +35,7 @@
         </div>
     </body>
 <%- include('../../partials/footer.ejs') %>
+<!-- Script for confirmation delete item in table -->
 <script>
     function confirmDelete(event, form) {
         event.preventDefault();

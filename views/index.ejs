@@ -15,36 +15,19 @@
         <hr>
 
         <div class="card-deck">
-            <div class="card">
-                <img src="/images/test.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Título</h5>
-                    <p class="card-text">Descrição</p>
+            <!-- Show games for sale -->
+            <% games.forEach(game => { %>
+                <div class="card sm-6">
+                    <img src="/images/games/<%= game.image %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= game.title %></h5>
+                        <p class="card-text"><%= game.description %></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/purchase/<%= game.id %>" class="btn btn-primary" target="blank" role="button">Comprar</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary" role="button">Comprar</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="/images/test.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Título</h5>
-                    <p class="card-text">Descrição</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary" role="button">Comprar</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="/images/test.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Título</h5>
-                    <p class="card-text">Descrição</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary" role="button">Comprar</a>
-                </div>
-            </div>
+            <% }) %>
         </div>
     </div>
 </body>

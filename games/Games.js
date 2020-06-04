@@ -26,12 +26,20 @@ const Game = connection.define("games", {
     description: {
         type: Sequelize.TEXT,
         allowNull: false
+    },
+    stock: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    indicated: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 
 Category.hasMany(Game);
 Game.belongsTo(Category);
 
-//  Game.sync({force: true});
+Game.sync({force: true});
 
 module.exports = Game;

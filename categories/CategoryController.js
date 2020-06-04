@@ -5,12 +5,8 @@ const slugify       = require("slugify");
 const adminAuth     = require("../middlewares/adminAuth");
 
 router.get("/admin/categories", adminAuth, (req, res) => {
-    res.render("admin/games/index");
-});
-
-router.get("/admin/categories", adminAuth, (req, res) => {
-    Category.findAll().then(categories =>  {
-        res.render("admin/categories/index", {categories: categories})
+    Category.findAll().then(categories => {
+        res.render("admin/categories/index", {categories: categories});
     })
 });
 
@@ -22,7 +18,13 @@ router.get("/admin/category/edit/:id", adminAuth, (req, res) => {
     var id = req.params.id;
 
     Category.findByPk(id).then(category => {
-        res.rende("admin/categories/edit", {category: Category})
+        if(category != undefined) {
+            res.render("admin/categories/edit", {category: category})
+        } else {
+            res.redirect("/admin/categories")
+        }
+    }).catch(err => {
+        res.redirect("/admin/categories")
     })
 });
 
@@ -54,24 +56,44 @@ router.post("/category/update", adminAuth, (req, res) => {
     var title   = req.body.title;
 
     if (id != undefined && title != undefined) {
-        Category.update(
-            {
-                title: title,
-                slug: slugify(title)
-            },
-            {
-                where: {
-                    id: id
-                }
+        Category.findOne({where: {title: title}}).then(category => {
+            if (category == undefined) {
+                Category.update(
+                    {
+                        title: title,
+                        slug: slugify(title)
+                    },
+                    {
+                        where: {
+                            id: id
+                        }
+                    }
+                ).then(() => {
+                    res.redirect("/admin/categories")
+                })
+            } else {
+                res.redirect("/admin/categories");
             }
-        ).then(() => {
-            res.redirect("/admin/categories")
         })
     } else {
         res.redirect("/admin/categories");
     }
 });
 
-
+router.post("/category/delete", adminAuth, (req, res) => {
+    var id = req.body.id;
+    
+    if (id != undefined) {
+        if (!isNaN(id)) {
+            Category.destroy({where: {id: id}}).then(() => {
+                res.redirect("/admin/categories");
+            })
+        } else {
+            res.redirect("/admin/categories");
+        }
+    } else {
+        res.redirect("/admin/categories");
+    }
+});
 
 module.exports = router;

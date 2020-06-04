@@ -8,6 +8,7 @@
             <hr>
             <form action="/game/search" method="post">
                 <label>Procure jogos por aqui: <input type="text" name="search" class="form-control"></label>
+                <button class="btn btn-success">Buscar</button>
             </form>
             <hr>
             <table class="table table-bordered">
@@ -21,6 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Show all items in database in the catgories table -->
                     <% games.forEach(game => {  %>    
                         <tr>
                             <td><%= game.id %></td>
@@ -41,14 +43,18 @@
             </table>
             <hr>
             <div class="row">
-                <div class="col col-12">
-                    <a href="/games/page/2" style="float: right;">Next >>></a>
-                </div>
+                <!-- Data paging -->
+                <% if (games.count > 30) { %>
+                    <div class="col col-12">
+                        <a href="/games/page/2" style="float: right;">Next >>></a>
+                    </div>
+                    <hr>
+                <% } %>
             </div>
-            <hr>
         </div>
     </body>
 <%- include('../../partials/footer.ejs') %>
+<!-- Script for confirmation delete item in table -->
 <script>
     function confirmDelete(event, form) {
         event.preventDefault();

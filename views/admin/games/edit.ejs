@@ -13,12 +13,22 @@
                         <input type="file" name="image" class="form-control" placeholder="Imagem"><br>
                         <input type="text" name="price" class="form-control" placeholder="00.00"><br>
                         <input type="url" name="url" class="form-control" placeholder="Link para compra">
-                        <textarea name="desc" placeholder="Descrição"></textarea>
+                        <label> Categoria / Gênero: </label>
                         <select name="category" class="form-control">
                             <% categories.forEach(category => { %>
                                 <option value="<%= category.id %>"><%= category.title %></option>
                             <% }) %>
-                        </select>
+                        </select><br>
+                        <input type="number" name="stock" class="form-control" placeholder="Quantidade no estoque"><br>
+                        <label>Classificão indicativa: </label>
+                        <select name="indicated" class="form-control">
+                            <option value="1">Livre</option>
+                            <option value="2">10+</option>
+                            <option value="3">12+</option>
+                            <option value="4">14+</option>
+                            <option value="5">18+</option>
+                        </select><br>
+                        <textarea name="desc" id="desc" class="form-control" placeholder="Descrição"></textarea><br>
                         <button type="submit" class="btn btn-success btn-block">Atualizar</button>
                     </form>
                 </div>
@@ -26,3 +36,13 @@
         </div>
     </body>    
 <%- include('../../partials/footer.ejs') %>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        language: "pt_BR",
+        selector: "#desc",
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    })
+</script>
