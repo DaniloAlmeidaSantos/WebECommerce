@@ -1,6 +1,6 @@
 const Sequelize     = require("sequelize");
-const connection    = require("../database/database");
-const Category      = require("../categories/Category");
+const connection    = require("./database/database");
+const Category      = require("./Category");
 
 const Game = connection.define("games", {
     title: {
@@ -40,6 +40,6 @@ const Game = connection.define("games", {
 Category.hasMany(Game);
 Game.belongsTo(Category);
 
-Game.sync({force: true});
+// Game.sync({force: true});
 
 module.exports = Game;

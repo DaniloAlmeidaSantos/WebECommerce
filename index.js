@@ -2,18 +2,18 @@
 const express       = require("express");
 const app           = express();
 const bodyParser    = require("body-parser");
-const connection    = require("./database/database");
+const connection    = require("./Models/database/database");
 const session       = require("express-session");
 
 // Controllers
-const adminController      = require("./admins/AdminController");
-const gameController       = require("./games/GameContoller");
-const categoryController   = require("./categories/CategoryController");
+const adminController      = require("./controllers/admins/AdminController");
+const gameController       = require("./controllers/games/GameContoller");
+const categoryController   = require("./controllers/categories/CategoryController");
 
 // Models
-const Admin     = require("./admins/Admin");
-const Game      = require("./games/Games");
-const Category  = require("./categories/Category");
+const Admin     = require("./Models/Admin");
+const Game      = require("./Models/Games");
+const Category  = require("./Models/Category");
 
 // View Engine
 app.set('view engine', 'ejs');

@@ -6,20 +6,25 @@
             <div class="card mt-4">
                 <div class="card-header">
                     <h2>Editar jogos</h2>
+                    <a href="/games/update/image/<%= game.id %>">Atualizar imagem? </a>
                 </div>
                 <div class="card-body">
-                    <form action="/games/update" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="title" class="form-control" placeholder="Título"><br>
-                        <input type="file" name="image" class="form-control" placeholder="Imagem"><br>
-                        <input type="text" name="price" class="form-control" placeholder="00.00"><br>
-                        <input type="url" name="url" class="form-control" placeholder="Link para compra">
+                    <form action="/games/update/image" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<%= game.id %>">
+                        <input type="text" name="title" class="form-control" placeholder="Título" value="<%= game.title %>"><br>
+                        <input type="text" name="price" class="form-control" placeholder="00.00" value="<%= game.price %>"><br>
+                        <input type="url" name="url" class="form-control" placeholder="Link para compra" value="<%= game.link %>"> 
                         <label> Categoria / Gênero: </label>
                         <select name="category" class="form-control">
                             <% categories.forEach(category => { %>
-                                <option value="<%= category.id %>"><%= category.title %></option>
+                                <% if (category.id == game.categoryId) { %>
+                                    <option value="<%= category.id %>" selected><%= category.title %></option>
+                                <% } else { %>
+                                    <option value="<%= category.id %>"><%= category.title %></option>
+                                <% } %>
                             <% }) %>
                         </select><br>
-                        <input type="number" name="stock" class="form-control" placeholder="Quantidade no estoque"><br>
+                        <input type="number" name="stock" class="form-control" placeholder="Quantidade no estoque" value="<%= game.stock %>"><br>
                         <label>Classificão indicativa: </label>
                         <select name="indicated" class="form-control">
                             <option value="1">Livre</option>
@@ -34,6 +39,10 @@
                 </div>
             </div>
         </div>
+
+        <div id="content" style="display: none;">
+            <%- game.description %>
+        </div>
     </body>    
 <%- include('../../partials/footer.ejs') %>
 <script src="/tinymce/tinymce.min.js"></script>
@@ -43,6 +52,9 @@
         selector: "#desc",
         plugins: [
             'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
-        ]
+        ],
+        init_instance_callback: () => {
+            tinymce.get("desc").setContent($("#content").html()); // => Passa um conteúdo para a TextArea pegando o conteúdo da DIV
+        }
     })
 </script>

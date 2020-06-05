@@ -1,8 +1,8 @@
 const express       = require("express");
 const router        = express.Router();
-const Category      = require("./Category");
+const Category      = require("../../Models/Category");
 const slugify       = require("slugify");
-const adminAuth     = require("../middlewares/adminAuth");
+const adminAuth     = require("../../middlewares/adminAuth");
 
 router.get("/admin/categories", adminAuth, (req, res) => {
     Category.findAll().then(categories => {

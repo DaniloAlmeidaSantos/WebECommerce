@@ -1,9 +1,9 @@
 const express   = require("express");
 const router    = express.Router();
-const Admin     = require("./Admin");
+const Admin     = require("../../Models/Admin");
 const bcrypt    = require("bcryptjs");
-const adminAuth = require("../middlewares/adminAuth");
-const alphaAuth = require("../middlewares/alphaAdmin");
+const adminAuth = require("../../middlewares/adminAuth");
+const alphaAuth = require("../../middlewares/alphaAdmin");
 
 // Routers 
 router.get("/admin/users", adminAuth, (req, res) => {
