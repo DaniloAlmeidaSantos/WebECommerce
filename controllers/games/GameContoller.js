@@ -3,6 +3,7 @@ const router        = express.Router();
 const adminAuth     = require("../../middlewares/adminAuth");
 const Category      = require("../../Models/Category");
 const Game          = require("../../Models/Games");
+const Barcode       = require("../../Models/Barcodes");
 const Sequelize     = require("sequelize");
 const Op            = Sequelize.Op;
 const slugify       = require("slugify");
@@ -49,6 +50,7 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
         var category    = req.body.category;
         var stock       = req.body.stock;
         var indicated   = req.body.indicated;
+        var barcode     = req.body.barcode;
         
         if (title != undefined && price != undefined) {
             Game.create({
@@ -62,7 +64,11 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
                 stock: stock,
                 indicated: indicated
             }).then(() => {
-                res.redirect("/admin/games");
+                Game.findOne({order: [['id', 'Desc']]}).then(id => {
+                    Barcode.create({barcode: barcode, gameId: id.id}).then(() => {
+                        res.redirect("/admin/games");
+                    })
+                });
             }).catch(err => {
                 res.redirect("/admin/games/new");
             });
@@ -103,7 +109,7 @@ router.post("/games/update", adminAuth, (req, res, next) => {
             res.redirect("/admin/games");
         })
     } else {
-        res.redirect("/admin/games/new");
+        res.redirect("/admin/agames/new");
     }
 });
 

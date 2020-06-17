@@ -6,12 +6,16 @@ const connection    = require("./Models/database/database");
 const session       = require("express-session");
 
 // Controllers
+const barcodeController    = require("./controllers/barcodes/barcodeController");
+const saleController       = require("./controllers/sales/saleController");
 const adminController      = require("./controllers/admins/AdminController");
 const gameController       = require("./controllers/games/GameContoller");
 const categoryController   = require("./controllers/categories/CategoryController");
 
 // Models
 const Admin     = require("./Models/Admin");
+const Barcode   = require("./Models/Barcodes");
+const Sale      = require("./Models/Sales");
 const Game      = require("./Models/Games");
 const Category  = require("./Models/Category");
 
@@ -46,6 +50,8 @@ connection
 app.use("/", adminController);
 app.use("/", categoryController);
 app.use("/", gameController);
+app.use("/", barcodeController);
+app.use("/", saleController);
 
 app.get("/", (req, res) => {
     Game.findAll().then(games => {
@@ -57,6 +63,7 @@ app.get("/", (req, res) => {
     })
 });
 
+// Page for purchase game
 app.get("/purchase/:id", (req, res) => {
     var id = req.params.id;
 
@@ -67,9 +74,51 @@ app.get("/purchase/:id", (req, res) => {
         }
     ).then(game =>  {
         if (req.session.user) {
-            res.render("purchase", {user: true, game: game});
+            res.render("utils/purchase", {user: true, game: game});
         } else {
-            res.render("purchase", {user: false, game: game});
+            res.render("utils/purchase", {user: false, game: game});
+        }
+    })
+});
+
+// Pagination games in sale
+app.get("/games/page/sale/:num", (req, res) => {
+    var page    = req.params.num;
+    var offset  = 0;
+
+    if (isNaN(page)) {
+        offset = 0;
+    } else {
+        offset = (parseInt(page) - 1) * 30;
+    }
+
+    Game.findAndCountAll(
+        {
+	        include: [{model: Category}],
+            limit: 30,
+            offset: offset
+        }
+    ).then(games => {
+        var next;
+
+        if (offset + 30 >= games.count) {
+            next = false;
+        } else {
+            next = true;
+        }
+
+        var result = {
+            page: parseInt(page),
+            next: next,
+            games: games
+        }
+
+        if (result) {
+            if (req.session.user) {
+                res.render("utils/pageSaleGames", {user: true, result: game});
+            } else {
+                res.render("utils/pageSaleGames", {user: false, result: game});
+            }
         }
     })
 });

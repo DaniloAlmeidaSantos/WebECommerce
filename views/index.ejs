@@ -1,34 +1,23 @@
 <%- include('partials/header.ejs') %>
 <%- include('partials/homenavbar.ejs') %>
 <body> 
+    <header>
+        <h1>Nando Games</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis exercitationem officiis.</p>
+        <a href="/" class="btn btn-warning">Catálogo</a>
+    </header>
+    <hr>
     <div class="container">
-        <hr>
-        <div class="jumbotron">
-            <h1 class="display-4">Bem Vindo</h1>
-            <p class="lead">Encontre os melhores preços de jogos no mercado, e faça já seu pedido.</p>
-            <hr class="my-4">
-            <p>
-                Não obstante, o fenômeno da Internet possibilita uma melhor visão global dos métodos utilizados na avaliação de resultados. Ainda assim, existem dúvidas a respeito de como a determinação clara de objetivos cumpre um papel essencial na formulação do processo de comunicação como um todo. Evidentemente, a adoção de políticas descentralizadoras estimula a padronização do sistema de participação geral.
-            </p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Clique aqui!</a>
-        </div>
-        <hr>
-
-        <div class="card-deck">
-            <!-- Show games for sale -->
+        <h1>Adcionados recentemente</h1>
+        <section class="flex">
             <% games.forEach(game => { %>
-                <div class="card sm-6">
-                    <img src="/images/games/<%= game.image %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= game.title %></h5>
-                        <p class="card-text"><%- game.description %></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/purchase/<%= game.id %>" class="btn btn-primary" target="blank" role="button">Comprar</a>
-                    </div>
+                <!-- Show games for sale -->
+                <div>
+                    <img src="/images/games/<%= game.image %>" alt="Imagem do jogo que está sendo vendido" width="100%">
+                    <p><%= game.title %></p>
                 </div>
             <% }) %>
-        </div>
+        </section>
     </div>
 </body>
 <hr>

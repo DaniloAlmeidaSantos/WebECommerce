@@ -1,0 +1,45 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+    <body>
+        <div class="container">
+            <hr>
+            <h2>Jogos vendidos</h2>
+            <a class="btn btn-success" href="/admin/games/new">Adicionar novos jogos</a>
+            <hr>
+            <form action="/game/search" method="post">
+                <label>Procure jogos por aqui: <input type="text" name="search" class="form-control"></label>
+                <button class="btn btn-success">Buscar</button>
+            </form>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do jogo</th>
+                        <th>Código de barras</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Show all items in database in the sales table -->
+                    <% sales.forEach(sale => {  %>    
+                        <tr>
+                            <td><%= sale.id %></td>
+                            <td><%= sale.title %></td>
+                            <td><a href="/barcodes/search/<%= sale.barcodes.barcode %>"><%= sale.barcodes.barcode %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <hr>
+            <div class="row">
+                <!-- Data paging -->
+                <% if (sales.count > 30) { %>
+                    <div class="col col-12">
+                        <a href="/sales/page/2" style="float: right;">Next >>></a>
+                    </div>
+                    <hr>
+                <% } %>
+            </div>
+        </div>
+    </body>
+<%- include('../../partials/footer.ejs') %>

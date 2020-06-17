@@ -20,4 +20,6 @@ const Admin = connection.define("admins", {
     } 
 });
 
+// Admin.sync({force: true});
+
 module.exports = Admin;
