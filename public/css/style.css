@@ -1,5 +1,4 @@
 /* General */
-
 body {
     width: 100%;
     height: 100%;
@@ -54,4 +53,23 @@ header p {
 .flex > div {
     flex: 1 1 200px;
     margin: 10px;
+}
+
+/* Sale page (admin page) */
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 10px;
+}
+  
+.grid3-item:nth-child(1) {
+  grid-row: 1 / 3;
+}
+  
+.grid3-item {
+  display: grid;
 }

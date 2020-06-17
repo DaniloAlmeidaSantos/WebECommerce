@@ -1,0 +1,18 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+    <body>
+        <div class="container">
+            <h1><%= game.game.title %></h1>
+            <section class="grid3">
+                <div class="grid3-item">
+                    <h2>Ficha técnica: </h2>
+                    <p>Nome do jogo: <%= game.game.title %></p>
+                </div>
+                <div class="grid3-item">
+                    <img src="/images/site/NGames.png">
+                    <p>Legenda</p>
+                </div>
+            </section>
+        </div>
+    </body>
+<%- include('../../partials/footer.ejs') %>

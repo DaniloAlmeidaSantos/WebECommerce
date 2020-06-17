@@ -17,7 +17,6 @@
                         <th>ID</th>
                         <th>Nome do jogo</th>
                         <th>Código de barras</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,15 +31,21 @@
                 </tbody>
             </table>
             <hr>
+            <!-- decision structure to know if there will be a next page -->
             <div class="row">
-                <!-- Data paging -->
-                <% if (sales.count > 30) { %>
-                    <div class="col col-12">
-                        <a href="/sales/page/2" style="float: right;">Next >>></a>
-                    </div>
-                    <hr>
-                <% } %>
+                <div class="col col-12">
+                    <% if(result.page > 2) { %>
+                        <a href="/sales/page/<%= result.page - 1 %>" style="float: left;"> <<< Prev </a>
+                    <% } else if(result.page == 2) { %>
+                        <a href="/admin/games" style="float: left;"> <<< Prev </a>
+                    <% } %>
+
+                    <% if(result.next) { %>
+                        <a href="/sales/page/<%= result.page + 1 %>" style="float: right;">Next >>></a>
+                    <% } %>
+                </div>
             </div>
+            <hr>
         </div>
     </body>
 <%- include('../../partials/footer.ejs') %>

@@ -48,13 +48,13 @@
             <div class="row">
                 <div class="col col-12">
                     <% if(result.page > 2) { %>
-                        <a href="/articles/page/<%= result.page - 1 %>" style="float: left;"> <<< Prev </a>
+                        <a href="/games/page/<%= result.page - 1 %>" style="float: left;"> <<< Prev </a>
                     <% } else if(result.page == 2) { %>
                         <a href="/admin/games" style="float: left;"> <<< Prev </a>
                     <% } %>
 
                     <% if(result.next) { %>
-                        <a href="/articles/page/<%= result.page + 1 %>" style="float: right;">Next >>></a>
+                        <a href="/games/page/<%= result.page + 1 %>" style="float: right;">Next >>></a>
                     <% } %>
                 </div>
             </div>
