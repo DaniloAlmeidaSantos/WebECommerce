@@ -54,7 +54,7 @@ app.use("/", barcodeController);
 app.use("/", saleController);
 
 app.get("/", (req, res) => {
-    Game.findAll().then(games => {
+    Game.findAll({limit: 6, order: [['id', 'DESC']]}).then(games => {
         if (req.session.user) {
             res.render("index", {user: true, games: games});
         } else {
@@ -115,9 +115,9 @@ app.get("/games/page/sale/:num", (req, res) => {
 
         if (result) {
             if (req.session.user) {
-                res.render("utils/pageSaleGames", {user: true, result: game});
+                res.render("utils/pageSaleGames", {user: true, result: result});
             } else {
-                res.render("utils/pageSaleGames", {user: false, result: game});
+                res.render("utils/pageSaleGames", {user: false, result: result});
             }
         }
     })

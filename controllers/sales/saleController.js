@@ -17,14 +17,15 @@ router.get("/admin/sales", adminAuth, (req, res) => {
 router.get("/sale/game/:id", adminAuth, (req, res) => {
     var id = req.params.id;
 
-    Barcode.findOne(
+    Game.findOne(
         {
-            where: {gameId: id},
-            include: [{model: Game}]
+            where: {id: id}
         }
     ).then(game => {
         res.render("admin/sales/sale", {game: game});
-    })
+    }).catch(() => {
+        res.redirect("/admin/games");
+    });
 });
 
 router.get("/sale/edit/status/:id", adminAuth, (req, res) => {
@@ -35,25 +36,28 @@ router.get("/sale/edit/status/:id", adminAuth, (req, res) => {
 });
 
 router.post("/sale/game", adminAuth, (req, res) => {
-    var status  = req.body.status;
+    var status  = "VENDIDO";
+    var gameId  = req.body.gameId;
     var title   = req.body.title;
-    var Barcode = req.body.barcode;
+    var barcode = req.body.barcode;
 
-    Sales.create({
-        status: status,
-        title: title,
-        barcodeId: barcode
-    }).then(() => {
-        Barcode.findOne({where: {id: barcode}}).then(game => {
-            Barcode.destroy({where: {id: barcode}}).then(() => {
-                Game.query("UPDATE games SET stock = stock - 1 WHERE id = " + game.gameId).then(() => {
+    
+    Barcode.findOne({where: {id: barcode, gameId: gameId}}).then(code => {
+        Sale.create({
+            status: status,
+            title: title,
+            barcodeId: barcode
+        }).then(() => {
+            Barcode.destroy({where: {id: code.id}}).then(() => {
+                Game.query("UPDATE games SET stock = stock - 1 WHERE id = " + code.gameId).then(() => {
                     res.redirect("/admin/sales");
                 });
             });
-        })
-        
+        }).catch(err => {
+            
+        });
     }).catch(err => {
-        
+        res.render("error", {message: "Produto não cadastrado!", link: "/admin/games", user: true});
     })
 });
 

@@ -4,20 +4,29 @@
     <header>
         <h1>Nando Games</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis exercitationem officiis.</p>
-        <a href="/" class="btn btn-warning">Catálogo</a>
+        <a href="/games/page/sale/1" class="btn btn-outline-warning">Catálogo</a>
     </header>
     <hr>
     <div class="container">
-        <h1>Adcionados recentemente</h1>
-        <section class="flex">
+        <h3>Adcionados recentemente: </h3>
+        <div class="row">
             <% games.forEach(game => { %>
-                <!-- Show games for sale -->
-                <div>
-                    <img src="/images/games/<%= game.image %>" alt="Imagem do jogo que está sendo vendido" width="100%">
-                    <p><%= game.title %></p>
+                <div id="cards-sale" class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="/images/games/<%= game.image %>" width="100%" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></img>
+                        <div class="card-body">
+                            <h3><%= game.title %></h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-success">Comprar</button>
+                                </div>
+                                <h4>R$ <%= game.price %></h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <% }) %>
-        </section>
+        </div>
     </div>
 </body>
 <hr>

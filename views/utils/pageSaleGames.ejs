@@ -1,6 +1,60 @@
-<%- include('partials/homenavbar.ejs') %>
-<%- include('partials/header.ejs') %>
+<%- include('../partials/homenavbar.ejs') %>
+<%- include('../partials/header.ejs') %>
     <body>
-        
+        <main role="main">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1>Cátalogo</h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                    <p>
+                        <a href="#products" class="btn btn-warning my-2">Produtos</a>
+                        <a href="/" class="btn btn-secondary my-2">Voltar para página inicial</a>
+                    </p>
+                </div>
+            </section>
+            
+            <div id="products" class="album py-5 bg-light">
+                <div class="container">
+                    <form class="form-inline my-2 my-md-0">
+                        <input class="form-control" type="text" placeholder="Procurar..." name="search" aria-label="Procurar"> 
+                        <button class="btn btn-outline-warning">Procurar</button>
+                    </form>
+                    <hr>
+                    <div class="row">
+                        <% result.games.rows.forEach(game => { %>
+                            <div id="cards-sale" class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <img src="/images/games/<%= game.image %>" width="100%" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></img>
+                                    <div class="card-body">
+                                        <h3><%= game.title %></h3>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-outline-success">Comprar</button>
+                                            </div>
+                                            <h4>R$ <%= game.price %></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <!-- decision structure to know if there will be a next page -->
+                <div class="row">
+                    <div class="col col-12">
+                        <% if(result.page > 2) { %>
+                            <a href="/games/page/<%= result.page - 1 %>" style="float: left;"> <<< Prev </a>
+                        <% } else if(result.page == 2) { %>
+                            <a href="/admin/games" style="float: left;"> <<< Prev </a>
+                        <% } %>
+
+                        <% if(result.next) { %>
+                            <a href="/games/page/<%= result.page + 1 %>" style="float: right;">Next >>></a>
+                        <% } %>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </main>
     </body>
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

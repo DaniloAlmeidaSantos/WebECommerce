@@ -1,14 +1,39 @@
-<%- include("partials/header.ejs") %>
-<%- include("partials/homenavbar.ejs") %>
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/homenavbar.ejs") %>
     <body>
-        <!-- Aqui deve ter um espaço para:
-            * Link (<a>) para ir para o link da compra;
-            * Link (<a>) com API para o whatssapp para conversar com o vendedor;
-            * Um espaço para descrição;
-            * Imagem do produto;
-            * Nome do produto;
-            * Gênero / categoria do produto
-            * Etiqueta indicativas ( https://www.bing.com/images/search?view=detailV2&ccid=itbrXs5y&id=F726953E9584D37EF8450D6B1E7311AEA71AE4A5&thid=OIP.itbrXs5yRcqshN6N_CJzpAAAAA&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fb%2fb3%2fClassifica%25C3%25A7%25C3%25A3o_Indicativa_-_2006.png&exph=191&expw=282&q=etiqueta+indicativa+para+maiores+de+12&simid=608029010819418175&ck=96729E533C5E2688644EEFE606D6B4E9&selectedIndex=3&ajaxhist=0 )
-        -->
+        <div class="container">
+            <hr>
+            <h1>Realizar a compra: </h1>
+            <hr>
+            <div class="row mb-6" id="grid-purchase">
+                <div class="col-6 col-lg-6">
+                    <img src="/images/games/<%= game.image %>" width="100%" alt="">
+                </div>
+                <div class="col-6 col-lg-6">
+                    <div class="card-deck text-center">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h2 style="white-space: pre-wrap;display: inline-block;"><%= game.title %></h1>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">R$ <%= game.price %></h1>
+                                <ul class="list-unstyled  mt-3 mb-4">
+                                    <li>Quantidade no estoque: <%= game.stock %>;</li>
+                                    <li>Jogo vendido em mídia física;</li>
+                                    <li>Link da página de compra no <a href="<%= game.link %>"> Facebook</a></li>
+                                    <li>Aceitamos pagamentos com cartão.</li>
+                                </ul>
+                                <label> <i><b>Contactar o vendedor pelo:</b></i></label>
+                                <br>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-outline-primary">Facebook</a>
+                                    <a href="#" class="btn btn-outline-success">WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
-<%- include("partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>

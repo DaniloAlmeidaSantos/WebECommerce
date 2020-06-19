@@ -1,35 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Alterna navegação">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-xl">
+    <a class="navbar-brand" href="#"><img src="/images/site/NGames.png" width="50" height="50"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">Marca escondida</a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(Página atual)</span></a>
+
+    <div class="collapse navbar-collapse" id="navbarsExample07XL">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="/games/page/sale/1">Catálogo</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Desativado</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown" aria-expanded="false">Suporte</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown07XL">
+            <a class="dropdown-item" href="#">Contato</a>
+            <a class="dropdown-item" href="#">Quem somos?</a>
+            <a class="dropdown-item" href="#">Como funciona?</a>
+          </div>
         </li>
-        <% if (user) { %>
-            <li class="nav-item">
-                <a href="/admin/users" class="nav-link">Painel administrativo</a>
-            </li>
-            <li class="nav-item ">
-                <a href="/logout" class="nav-link">Sair</a>
-            </li>
-        <% } else {%>
-            <li class="nav-item ">
-                <a href="/login" class="nav-link">Login</a>
-            </li>
-        <% } %>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+      <ul class="navbar-nav ml-auto">
+        <% if (user) { %>
+          <li class="nav-item">
+            <a href="/admin/users" class="nav-link">Painel administrativo</a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" id="link-nav" class="btn btn-outline-danger">Sair</a>
+          </li>
+        <% } else {%>
+          <li class="nav-item">
+              <span class="bi bi-person-fill">
+                <a href="/login" id="link-nav" class="btn btn-outline-success">Login</a>
+              </span>
+          </li>
+        <% } %>
+      </ul>&nbsp;
+      <form class="form-inline my-2 my-md-0">
+        <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
       </form>
     </div>
-  </nav>
+  </div>
+</nav>

@@ -14,14 +14,15 @@ h1, h2, h3 {
 }
 
 /* Navbar */
-
-#logo {
-    width: 55px;
-    height: 55px;
+body {
+    padding-bottom: 20px;
 }
 
+#link-nav {
+    border-radius: 20px;
+}
+  
 /* Header */
-
 header {
     width: 100%;
     height: 330px;
@@ -41,35 +42,50 @@ header p {
     margin-bottom: 2em;
 }
 
-/* Flexbox cards */
+/* Cards sales */
 
-.flex {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 0 auto;
+#cards-sale {
+    opacity: 0.7;
+    color: #F01118;
 }
 
-.flex > div {
-    flex: 1 1 200px;
-    margin: 10px;
+#cards-sale:hover {
+    opacity: 1.0;
 }
 
-/* Sale page (admin page) */
+#cards-sale h4 {
+    color: #F28D35;
+}
 
-.grid3 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 10px;
+/* Page purchase */
+#grid-purchase img {
+    border-radius: 10px;
+    box-shadow: #888888 10px 10px 5px;
 }
-  
-.grid3-item:nth-child(1) {
-  grid-row: 1 / 3;
+
+/* Grid´s*/
+.themed-grid-col {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgba(86, 61, 124, .15);
+    border: 1px solid rgba(86, 61, 124, .2);
 }
-  
-.grid3-item {
-  display: grid;
+
+.themed-container {
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: rgba(0, 123, 255, .15);
+    border: 1px solid rgba(0, 123, 255, .2);
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    #cards-sale {
+        opacity: 1.0;
+    }
+
+    #grid-purchase img {
+        display: block;
+    }
 }
