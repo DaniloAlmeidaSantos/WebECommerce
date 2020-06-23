@@ -5,7 +5,20 @@ const Sequelize = require('sequelize');
 const connection = new Sequelize('nandogames', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb',
-    timezone: "-03:00"
+    timezone: "-03:00",
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      },
+    
+      // SQLite only
+      storage: 'path/to/database.sqlite',
+    
+      // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+      operatorsAliases: false
 });
 
 module.exports = connection;

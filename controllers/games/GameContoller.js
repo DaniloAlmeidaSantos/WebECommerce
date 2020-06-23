@@ -50,7 +50,6 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
         var category    = req.body.category;
         var stock       = req.body.stock;
         var indicated   = req.body.indicated;
-        var barcode     = req.body.barcode;
         
         if (title != undefined && price != undefined) {
             Game.create({
@@ -64,11 +63,7 @@ router.post("/games/create", multer.single('image'), adminAuth, (req, res, next)
                 stock: stock,
                 indicated: indicated
             }).then(() => {
-                Game.findOne({order: [['id', 'Desc']]}).then(id => {
-                    Barcode.create({barcode: barcode, gameId: id.id}).then(() => {
-                        res.redirect("/admin/games");
-                    })
-                });
+                res.redirect("/admin/games");
             }).catch(err => {
                 res.redirect("/admin/games/new");
             });

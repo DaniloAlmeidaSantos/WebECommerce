@@ -5,16 +5,16 @@
             <div class="row mb-3" style="word-wrap: break-word;">
                 <div class="col-md-8 themed-grid-col">
                     <div class="pb-3">
-                        <h2><%= game.title %></h2>
+                        <h1><%= game.title %></h1>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <h1>Ficha técnica: </h1>
-                            <h3 class="card-title pricing-card-title">Preço: R$ <%= game.price %></h3>
+                            <h2>Ficha técnica: </h2>
+                            <h3 class="card-title pricing-card-title" style="color: green;">Preço: R$ <%= game.price %></h3>
                             <ul class="list-unstyled  mt-3 mb-4">
                                 <li>Quantidade no estoque: <%= game.stock %>;</li>
                                 <li>Link da página de compra: <a href="<%= game.link %>"><%= game.link %></a></li>
-                                <li>Classifição indicativa: </li>
+                                <li><img src="/images/site/<%= game.indicated %>" alt="Classificação indicativa"> </li>
                             </ul>
                         </div>
                         <div class="col-md-6 themed-grid-col">
@@ -23,6 +23,7 @@
                                 <input type="text" placeholder="Código de barras" required name="barcode" class="form-control"><br>
                                 <input type="hidden" name="title" value="<%= game.title %>">
                                 <input type="hidden" name="gameId" value="<%= game.id %>">
+                                <input type="hidden" name="stock" value="<%= game.stock%>">
                                 <h1>Total: R$ <%= game.price %> </h1>
                                 <button class="btn btn-block btn-success">Finalizar venda</button>
                             </form>

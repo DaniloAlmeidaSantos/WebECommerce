@@ -13,7 +13,6 @@
                         <input type="file" name="image" class="form-control" placeholder="Imagem"><br>
                         <input type="text" name="price" class="form-control" placeholder="00.00"><br>
                         <input type="url" name="url" placeholder="Link de compra" class="form-control"><br>
-                        <input type="text" name="barcode" placeholder="Código de barras" class="form-control">
                         <label>Categoria / Gênero:</label>
                         <select name="category" class="form-control">
                             <% categories.forEach(category => { %>
@@ -23,11 +22,12 @@
                         <input type="number" name="stock" class="form-control" placeholder="Quantidade no estoque"><br>
                         <label>Classificão indicativa: </label>
                         <select name="indicated" class="form-control">
-                            <option value="1">Livre</option>
-                            <option value="2">10+</option>
-                            <option value="3">12+</option>
-                            <option value="4">14+</option>
-                            <option value="5">18+</option>
+                            <option value="1.png">Livre</option>
+                            <option value="2.png">10+</option>
+                            <option value="3.png">12+</option>
+                            <option value="4.png">14+</option>
+                            <option value="5.png">16+</option>
+                            <option value="6.png">18+</option>
                         </select><br>
                         <textarea name="desc" id="desc" class="form-control" placeholder="Descrição"></textarea><br>
                         <button type="submit" class="btn btn-success btn-block">Criar</button>

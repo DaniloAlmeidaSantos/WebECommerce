@@ -29,7 +29,7 @@ router.get("/sale/game/:id", adminAuth, (req, res) => {
 });
 
 router.get("/sale/edit/status/:id", adminAuth, (req, res) => {
-    var id = req.params.id;
+    var id = req.params.id; 
     Sale.findByPk(id).then(status => {
         res.render("admin/sales/edit", {status: status});
     })
@@ -40,23 +40,24 @@ router.post("/sale/game", adminAuth, (req, res) => {
     var gameId  = req.body.gameId;
     var title   = req.body.title;
     var barcode = req.body.barcode;
+    var stock   = req.body.stock;
 
-    
-    Barcode.findOne({where: {id: barcode, gameId: gameId}}).then(code => {
+    Barcode.findOne({where: {barcode: barcode, gameId: gameId}}).then(code => {
         Sale.create({
             status: status,
             title: title,
-            barcodeId: barcode
+            barcodeId: code.id
         }).then(() => {
             Barcode.destroy({where: {id: code.id}}).then(() => {
-                Game.query("UPDATE games SET stock = stock - 1 WHERE id = " + code.gameId).then(() => {
+                stock = stock - 1; 
+                Game.update({stock: stock}, {where: {id: gameId}}).then(() => {
                     res.redirect("/admin/sales");
                 });
-            });
-        }).catch(err => {
-            
-        });
-    }).catch(err => {
+            })
+        }).catch(() => {
+
+        })
+    }).catch(() => {
         res.render("error", {message: "Produto não cadastrado!", link: "/admin/games", user: true});
     })
 });
