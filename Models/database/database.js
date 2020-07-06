@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 // Config database connection
 const connection = new Sequelize('nandogames', 'daniloalmeida', 'nando2020', {
-    host: 'localhost',
+    host: 'mysql669.umbler.com',
     dialect: 'mysql',
     timezone: "-03:00",
 
