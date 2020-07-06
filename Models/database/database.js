@@ -2,9 +2,9 @@
 const Sequelize = require('sequelize');
 
 // Config database connection
-const connection = new Sequelize('nandogames', 'root', '', {
+const connection = new Sequelize('nandogames', 'daniloalmeida', 'nando2020', {
     host: 'localhost',
-    dialect: 'mariadb',
+    dialect: 'mysql',
     timezone: "-03:00",
 
     pool: {

@@ -66,19 +66,23 @@ app.get("/", (req, res) => {
 // Page for purchase game
 app.get("/purchase/:id", (req, res) => {
     var id = req.params.id;
-
-    Game.findOne(
-        {
-            include:  [{model: Category}],
-            where: {id: id}
-        }
-    ).then(game =>  {
-        if (req.session.user) {
-            res.render("utils/purchase", {user: true, game: game});
-        } else {
-            res.render("utils/purchase", {user: false, game: game});
-        }
-    })
+    if (!isNaN(id)) {
+        Game.findOne(
+            {
+                include:  [{model: Category}],
+                where: {id: id}
+            }
+        ).then(game =>  {
+            if (req.session.user) {
+                res.render("utils/purchase", {user: true, game: game});
+            } else {
+                res.render("utils/purchase", {user: false, game: game});
+            }
+        })
+    } else {
+        
+    }
+    
 });
 
 // Pagination games in sale
@@ -123,6 +127,6 @@ app.get("/games/page/sale/:num", (req, res) => {
     })
 });
 
-app.listen(8080, () => {
+app.listen(3000, () => {
     console.log("Server is running");
 });

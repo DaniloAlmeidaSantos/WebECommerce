@@ -12,12 +12,12 @@ router.get("/admin/users", adminAuth, (req, res) => {
     });
 });
 
-router.get("/admin/users/create", alphaAuth, (req, res) => {
+router.get("/admin/users/create", (req, res) => {
     res.render("admin/users/create");
 });
 
 // Creating new Admins / Users
-router.post("/admin/create", alphaAuth, (req, res) => {
+router.post("/admin/create", (req, res) => {
     var name        = req.body.name;
     var lastName    = req.body.lastName;
     var email       = req.body.email;
