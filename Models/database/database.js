@@ -1,5 +1,5 @@
 // Initialize Sequelize
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
 // Config database connection
 const connection = new Sequelize('nandogames', 'daniloalmeida', 'nando2020', {
