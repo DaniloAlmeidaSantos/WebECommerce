@@ -127,6 +127,8 @@ app.get("/games/page/sale/:num", (req, res) => {
     })
 });
 
+var port = process.env.PORT || 3000;
+
 app.listen(3000, () => {
-    console.log("Server is running");
+    console.log("Umbler listening on port %s", port);
 });
